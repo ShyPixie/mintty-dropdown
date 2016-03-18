@@ -30,10 +30,27 @@ start() {
     WinActivate ahk_id %previousWin%
 }
 
+checkWinStatus() {
+    ifWinActive ahk_class mintty-dropdown
+    {
+        return "hide"
+    }
+    else
+    {
+        DetectHiddenWindows off
+        WinGet, window,, ahk_class mintty-dropdown
+        if %window%
+        {
+            return "hide"
+        }
+        DetectHiddenWindows On
+        return "show"
+    }
+}
+
 toggle() {
     global
-
-    ifWinActive ahk_class mintty-dropdown
+    if InStr(checkWinStatus(), "hide")
     {
         WinHide ahk_class mintty-dropdown
         WinActivate ahk_id %previousWin%
