@@ -64,8 +64,8 @@ checkWinStatus() {
     else
     {
         DetectHiddenWindows off
-        WinGet, window,, %window%
-        if %window%
+        WinGet, temp_window,, %window%
+        if %temp_window%
         {
             return "hide"
         }
