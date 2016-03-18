@@ -1,3 +1,21 @@
+; This file is part of mintty-dropdown.
+;
+; Lara Maia <dev@lara.click> 2016
+;
+; mintty-dropdown is free software: you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation, either version 3 of the License, or
+; (at your option) any later version.
+
+; mintty-dropdown is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+
+; You should have received a copy of the GNU General Public License
+; along with mintty-dropdown.  If not, see <http://www.gnu.org/licenses/>.
+;
+
 #NoEnv
 #SingleInstance ignore
 SendMode Input
