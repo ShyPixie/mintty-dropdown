@@ -27,9 +27,9 @@ Menu, Tray, Add, Exit, BtnExit
 RegRead, cygwinDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
 binDir = %cygwinDir%\bin
 
-shells = /usr/bin/fish
+shell = /bin/tmux -2 new-session -A -s mintty-dropdown -t principal
 mintty = %binDir%\mintty.exe
-console = %mintty% --class mintty-dropdown %shells%
+console = %mintty% --class mintty-dropdown %shell%
 
 height = 400
 
