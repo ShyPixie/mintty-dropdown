@@ -21,8 +21,8 @@
 SendMode Input
 DetectHiddenWindows on
 
-;Menu, Tray, NoStandard
-;Menu, Tray, Add, BtnExit
+Menu, Tray, NoStandard
+Menu, Tray, Add, Exit, BtnExit
 
 RegRead, cygwinDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
 binDir = %cygwinDir%\bin
@@ -93,8 +93,9 @@ Launch_App2::
     return
 
 BtnExit:
-    if ahk_class mintty-dropdown
+    IfWinExist ahk_class mintty-dropdown
     {
         WinClose, ahk_class mintty-dropdown
     }
+
     ExitApp
