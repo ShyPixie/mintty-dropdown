@@ -35,7 +35,6 @@ height = 400
 
 setGeometry() {
     global
-    window = ahk_class mintty-dropdown
 
     WinSet, AlwaysOnTop, On, %window%
     WinSet,   Style, -0x00C00000, %window% ; WS_CAPTION
@@ -51,19 +50,21 @@ start() {
 
     WinGet, previousWin, ID, A
     Run %console%, %binDir%, Hide
-    WinWait ahk_class mintty-dropdown
+    WinWait %window%
     WinActivate ahk_id %previousWin%
 }
 
 checkWinStatus() {
-    ifWinActive ahk_class mintty-dropdown
+    global
+
+    ifWinActive %window%
     {
         return "hide"
     }
     else
     {
         DetectHiddenWindows off
-        WinGet, window,, ahk_class mintty-dropdown
+        WinGet, window,, %window%
         if %window%
         {
             return "hide"
@@ -75,21 +76,24 @@ checkWinStatus() {
 
 toggle() {
     global
+
     if InStr(checkWinStatus(), "hide")
     {
-        WinHide ahk_class mintty-dropdown
+        WinHide %window%
         WinActivate ahk_id %previousWin%
     }
     else
     {
         WinGet, previousWin, ID, A
-        WinShow ahk_class mintty-dropdown
-        WinActivate ahk_class mintty-dropdown
+        WinShow %window%
+        WinActivate %window%
     }
 }
 
 Launch_App2::
-    IfWinNotExist ahk_class mintty-dropdown
+    window = ahk_class mintty-dropdown
+
+    IfWinNotExist %window%
     {
         start()
     }
@@ -100,9 +104,11 @@ Launch_App2::
     return
 
 BtnExit:
-    IfWinExist ahk_class mintty-dropdown
+    window = ahk_class mintty-dropdown
+
+    IfWinExist %window%
     {
-        WinClose, ahk_class mintty-dropdown
+        WinClose
     }
 
     ExitApp
