@@ -35,8 +35,15 @@ height = 400
 
 setGeometry() {
     global
+    window = ahk_class mintty-dropdown
 
-    WinMove, ahk_class mintty-dropdown,, 0, 0, A_ScreenWidth, %height%
+    WinSet, AlwaysOnTop, On, %window%
+    WinSet,   Style, -0x00C00000, %window% ; WS_CAPTION
+    WinSet,   Style, -0x00040000, %window% ; WS_THICKFRAME
+    WinSet,   Style, -0x00200000, %window% ; WS_VSCROLL
+    WinSet, ExStyle,  0x00000080, %window% ; WS_EX_TOOLWINDOW
+
+    WinMove, %window%,, 0, 0, A_ScreenWidth, %height%
 }
 
 start() {
