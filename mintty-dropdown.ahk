@@ -18,6 +18,7 @@
 
 #NoEnv
 #SingleInstance ignore
+#InputLevel, 100
 SendMode Input
 DetectHiddenWindows on
 
