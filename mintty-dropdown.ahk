@@ -21,6 +21,12 @@
 SendMode Input
 DetectHiddenWindows on
 
+if not A_IsAdmin
+{
+    Run *RunAs "%A_ScriptFullPath%"
+    ExitApp
+}
+
 Menu, Tray, NoStandard
 Menu, Tray, Add, Exit, BtnExit
 
