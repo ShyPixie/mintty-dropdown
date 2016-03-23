@@ -24,3 +24,20 @@ read "How To build" below.
 
 You can change the toggle key, default shell, terminal size, and other
 options by editing the ahk script and building again.
+
+---
+
+Lara Maia <dev@lara.click> 2016
+
+mintty-dropdown is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+The Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+mintty-dropdown is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with mintty-dropdown.  If not, see <http://www.gnu.org/licenses/>.
