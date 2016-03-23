@@ -48,10 +48,8 @@ setGeometry() {
 start() {
     global
 
-    WinGet, previousWin, ID, A
     Run %console%, %binDir%, Hide
     WinWait %window%
-    WinActivate ahk_id %previousWin%
 }
 
 checkWinStatus() {
@@ -59,7 +57,14 @@ checkWinStatus() {
 
     ifWinActive %window%
     {
-        return "hide"
+        DetectHiddenWindows off
+        WinGet, temp_window,, %window%
+        if %temp_window%
+        {
+            return "hide"
+        }
+        DetectHiddenWindows on
+        return "show"
     }
     else
     {
@@ -80,11 +85,9 @@ toggle() {
     if InStr(checkWinStatus(), "hide")
     {
         WinHide %window%
-        WinActivate ahk_id %previousWin%
     }
     else
     {
-        WinGet, previousWin, ID, A
         WinShow %window%
         WinActivate %window%
     }
