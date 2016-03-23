@@ -33,6 +33,7 @@ Menu, Tray, Add, Exit, BtnExit
 
 RegRead, cygwinDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
 binDir = %cygwinDir%\bin
+homeDir = %cygwinDir%\home\%A_UserName%
 
 shell = /bin/tmux -2 new-session -A -s mintty-dropdown -t principal
 mintty = %binDir%\mintty.exe
@@ -55,7 +56,7 @@ setGeometry() {
 start() {
     global
 
-    Run %console%, %binDir%, Hide
+    Run %console%, %homeDir%, Hide
     WinWait %window%
 }
 
