@@ -31,11 +31,21 @@ if not A_IsAdmin
 Menu, Tray, NoStandard
 Menu, Tray, Add, Exit, BtnExit
 
-RegRead, cygwinDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
-binDir = %cygwinDir%\bin
-homeDir = %cygwinDir%\home\%A_UserName%
+iniFile = %A_WorkingDir%\mintty-dropdown.ini
 
-shell = /bin/tmux -2 new-session -A -s mintty-dropdown -t principal
+IniRead, cygwinDir, %iniFile%, Global, cygwinDir
+if cygwinDir contains ERROR
+    RegRead, cygwinDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
+
+IniRead, shell, %iniFile%, Global, shell
+if shell contains ERROR
+    shell = /bin/sh
+
+IniRead, homeDir, %iniFile%, Global, homeDir
+if homeDir contains ERROR
+    homeDir = %cygwinDir%\home\%A_UserName%
+
+binDir = %cygwinDir%\bin
 mintty = %binDir%\mintty.exe
 console = %mintty% --class mintty-dropdown %shell%
 

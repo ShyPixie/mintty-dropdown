@@ -23,7 +23,7 @@ read "How To build" below.
 2. Press the Calculator key to toggle console
 
 You can change the toggle key, default shell, terminal size, and other
-options by editing the ahk script and building again.
+options by editing configuration file (mintty-dropdown.ini)
 
 ---
 
