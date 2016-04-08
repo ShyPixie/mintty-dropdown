@@ -51,6 +51,21 @@ console = %mintty% --class mintty-dropdown %shell%
 
 height = 400
 
+IniRead, consoleHotKey, %iniFile%, Global, consoleHotKey
+if consoleHotKey contains ERROR
+    consoleHotKey = Launch_App2
+HotKey, %consoleHotKey%, ConsoleCheck
+
+IniRead, fullScreenHotKey, %iniFile%, Global, fullScreenHotKey
+if fullScreenHotKey contains ERROR
+    fullScreenHotKey = !F11
+HotKey, %fullScreenHotKey%, fullScreenCheck
+
+if fullScreenHotKey != !F11
+    HotKey, !F11, Ignore
+if fullScreenHotKey != !Enter
+    HotKey, !Enter, Ignore
+
 setGeometry() {
     global
 
@@ -111,7 +126,7 @@ toggle() {
     }
 }
 
-Launch_App2::
+consoleCheck:
     window = ahk_class mintty-dropdown
 
     IfWinNotExist %window%
@@ -124,7 +139,7 @@ Launch_App2::
 
     return
 
-!F11::
+fullScreenCheck:
     if InStr(checkWinStatus(), "hide")
     {
         a += 1
@@ -139,6 +154,9 @@ Launch_App2::
         }
     }
 
+    return
+
+Ignore:
     return
 
 BtnExit:
