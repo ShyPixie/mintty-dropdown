@@ -66,6 +66,8 @@ if fullScreenHotKey != !F11
 if fullScreenHotKey != !Enter
     HotKey, !Enter, Ignore
 
+return
+
 setGeometry() {
     global
 
