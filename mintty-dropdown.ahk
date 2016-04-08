@@ -64,7 +64,11 @@ HotKey, %fullScreenHotKey%, fullScreenCheck
 if fullScreenHotKey != !F11
     HotKey, !F11, Ignore
 if fullScreenHotKey != !Enter
-    HotKey, !Enter, Ignore
+    Hotkey, !Enter, Ignore
+
+window = ahk_class mintty-dropdown
+start()
+setGeometry()
 
 return
 
@@ -83,8 +87,11 @@ setGeometry() {
 start() {
     global
 
-    Run %console%, %homeDir%, Hide
-    WinWait %window%
+    IfWinNotExist %window%
+    {
+        Run %console%, %homeDir%, Hide
+        WinWait %window%
+    }
 }
 
 checkWinStatus() {
@@ -131,11 +138,7 @@ toggle() {
 consoleCheck:
     window = ahk_class mintty-dropdown
 
-    IfWinNotExist %window%
-    {
-        start()
-    }
-
+    start()
     setGeometry()
     toggle()
 
