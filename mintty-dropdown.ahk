@@ -124,6 +124,23 @@ Launch_App2::
 
     return
 
+!F11::
+    if InStr(checkWinStatus(), "hide")
+    {
+        a += 1
+        if InStr(Mod(a, 2), 0)
+        {
+            Send !{F11}
+            setGeometry()
+        }
+        else
+        {
+            Send !{F11}
+        }
+    }
+
+    return
+
 BtnExit:
     window = ahk_class mintty-dropdown
 
