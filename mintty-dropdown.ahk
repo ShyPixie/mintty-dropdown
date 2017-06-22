@@ -97,28 +97,14 @@ start() {
 checkWinStatus() {
     global
 
-    ifWinActive %window%
+    DetectHiddenWindows off
+    WinGet, temp_window,, %window%
+    if %temp_window%
     {
-        DetectHiddenWindows off
-        WinGet, temp_window,, %window%
-        if %temp_window%
-        {
-            return "hide"
-        }
-        DetectHiddenWindows on
-        return "show"
+        return "hide"
     }
-    else
-    {
-        DetectHiddenWindows off
-        WinGet, temp_window,, %window%
-        if %temp_window%
-        {
-            return "hide"
-        }
-        DetectHiddenWindows On
-        return "show"
-    }
+    DetectHiddenWindows on
+    return "show"
 }
 
 toggle() {
