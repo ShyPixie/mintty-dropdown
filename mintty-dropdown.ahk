@@ -33,9 +33,9 @@ Menu, Tray, Add, Exit, BtnExit
 
 iniFile = %A_WorkingDir%\mintty-dropdown.ini
 
-IniRead, cygwinDir, %iniFile%, Global, cygwinDir
-if cygwinDir contains ERROR
-    RegRead, cygwinDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
+IniRead, rootDir, %iniFile%, Global, rootDir
+if rootDir contains ERROR
+    RegRead, rootDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
 
 IniRead, shell, %iniFile%, Global, shell
 if shell contains ERROR
@@ -43,11 +43,17 @@ if shell contains ERROR
 
 IniRead, homeDir, %iniFile%, Global, homeDir
 if homeDir contains ERROR
-    homeDir = %cygwinDir%\home\%A_UserName%
+    homeDir = %rootDir%\home\%A_UserName%
 
-binDir = %cygwinDir%\bin
-mintty = %binDir%\mintty.exe
-console = %mintty% --class mintty-dropdown %shell%
+IniRead, binDir, %iniFile%, Global, binDir
+if binDir contains ERROR
+    binDir = %rootDir%\bin
+
+IniRead, minttyPath, %iniFile%, Global, minttyPath
+if minttyPath contains ERROR
+    minttyPath = %binDir%\mintty.exe
+
+console = %minttyPath% --class mintty-dropdown %shell%
 
 height = 400
 
