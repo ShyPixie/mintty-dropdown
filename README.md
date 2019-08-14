@@ -4,7 +4,7 @@ A little [AutoHotkey](http://www.autohotkey.com/) script that adds
 support for drop-down in the mintty.
 
 ## Dependencies
-- [Cygwin (Click for information)](https://www.cygwin.com/)
+- Cygwin or MSYS
 
 ## How to use?
 1. Download from Releases tab
