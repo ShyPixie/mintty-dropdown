@@ -55,7 +55,9 @@ if minttyPath contains ERROR
 
 console = %minttyPath% --class mintty-dropdown %shell%
 
-height = 400
+IniRead, height, %iniFile%, Global, height
+if height contains ERROR
+    height = 400
 
 IniRead, consoleHotKey, %iniFile%, Global, consoleHotKey
 if consoleHotKey contains ERROR
@@ -72,6 +74,18 @@ if fullScreenHotKey != !F11
 if fullScreenHotKey != !Enter
     Hotkey, !Enter, Ignore
 
+IniRead, screenMoveRight, %iniFile%, Global, screenMoveRight
+if screenMoveRight contains ERROR
+    screenMoveRight = ^+Right
+HotKey, %screenMoveRight%, screenMoveRightCheck
+
+IniRead, screenMoveLeft, %iniFile%, Global, screenMoveLeft
+if screenMoveLeft contains ERROR
+    screenMoveLeft = ^+Left
+HotKey, %screenMoveLeft%, screenMoveLeftCheck
+
+CurrentScreenWidth = 0
+CurrentScreenHeight = 0
 window = ahk_class mintty-dropdown
 start()
 setGeometry()
@@ -87,7 +101,7 @@ setGeometry() {
     WinSet,   Style, -0x00200000, %window% ; WS_VSCROLL
     WinSet, ExStyle,  0x00000080, %window% ; WS_EX_TOOLWINDOW
 
-    WinMove, %window%,, 0, 0, A_ScreenWidth, %height%
+    WinMove, %window%,, CurrentScreenWidth, CurrentScreenHeight, A_ScreenWidth, %height%
 }
 
 start() {
@@ -150,6 +164,20 @@ fullScreenCheck:
             Send !{F11}
         }
     }
+
+    return
+
+screenMoveLeftCheck:
+    SysGet, CurrentScreenWidth, 76
+    SysGet, CurrentScreenHeight, 77
+    setGeometry()
+
+    return
+
+screenMoveRightCheck:
+    CurrentScreenWidth = 0
+    CurrentScreenHeight = 0
+    setGeometry()
 
     return
 
