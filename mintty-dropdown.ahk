@@ -35,7 +35,10 @@ iniFile = %A_WorkingDir%\mintty-dropdown.ini
 
 IniRead, rootDir, %iniFile%, Global, rootDir
 if rootDir contains ERROR
-    RegRead, rootDir, HKEY_LOCAL_MACHINE\SOFTWARE\Cygwin\setup, rootdir
+{
+    MsgBox,, Error, Please, check your config file!
+    Gosub BtnExit
+}
 
 IniRead, shell, %iniFile%, Global, shell
 if shell contains ERROR
@@ -47,11 +50,11 @@ if homeDir contains ERROR
 
 IniRead, binDir, %iniFile%, Global, binDir
 if binDir contains ERROR
-    binDir = %rootDir%\bin
+    binDir = /usr/bin
 
 IniRead, minttyPath, %iniFile%, Global, minttyPath
 if minttyPath contains ERROR
-    minttyPath = %binDir%\mintty.exe
+    minttyPath = %rootDir%\%binDir%\mintty.exe
 
 console = %minttyPath% --class mintty-dropdown %shell%
 
