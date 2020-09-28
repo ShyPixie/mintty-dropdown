@@ -56,7 +56,7 @@ IniRead, minttyPath, %iniFile%, Global, minttyPath
 if minttyPath contains ERROR
     minttyPath = %rootDir%\%binDir%\mintty.exe
 
-console = %minttyPath% --class mintty-dropdown %shell%
+console = %minttyPath% "--WSL=" "--configdir=%A_AppData%\wsltty" "--class=mintty-dropdown" "--" "%shell%"
 
 IniRead, height, %iniFile%, Global, height
 if height contains ERROR
